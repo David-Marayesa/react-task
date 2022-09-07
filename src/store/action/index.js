@@ -1,11 +1,6 @@
-export const flip = () => {
+export const flip = (id) => {
     return {
-        type: "FLIP"
-    }
-}
-
-export const unFlip = () => {
-    return {
-        type: "UNFLIP"
+        type: "FLIP",
+        payload: id
     }
 }

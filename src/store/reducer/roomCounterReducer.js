@@ -1,22 +1,19 @@
 import { moveOutList } from "../../data";
+import React, { useState } from 'react';
 
-const roomCounterReducer = (state = moveOutList, action) => {
+export const roomCounterReducer = (state = moveOutList, action) => {
     switch (action.type) {
         case 'FLIP': {
-            const index = state.findIndex((item) => item.id !== action.index);
-            console.log(index);
-            // const newArray = [...state];      //clone the array
-            // newArray[index].rooms = + 1      // update the new value
+            let room = state.find((room) => room.id === action.payload)
+            let index = state.findIndex((room) => room.id === action.payload);
 
-            // console.log(newArray[index]);
-            // return {
-            //     ...state, //copy the original state
-            //     state: newArray
-            // }
+            const newRoom = state.filter((room) => room.id !== action.payload);
+         
+            return state = [{...room, rooms: room.rooms + 1 }, ...newRoom];
         }
-            
+
         default:
-            return state
+            return state;
     }
 }
 

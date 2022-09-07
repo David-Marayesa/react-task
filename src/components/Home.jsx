@@ -6,16 +6,16 @@ import { flip, unFlip } from '../store/action';
 
 const Home = () => {
 
-    const dispatch =  useDispatch();
+    const dispatch = useDispatch();
     const moveOutList = useSelector((state) => state.room);
-    const handleFlip = () => {
-        dispatch(flip());
+    const handleFlip = (id) => {
+        dispatch(flip(id));
     }
-    
+
     return (
         <div className='home'>
             <h1>Move-out List</h1>
-            <Table>
+            <Table responsive>
                 <thead>
                     <tr>
                         <th>Move-out Date</th>
@@ -30,10 +30,10 @@ const Home = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {moveOutList.map((list, index) => (
-                        <tr key={index}>
+                    {moveOutList.map((list) => (
+                        <tr key={list.id}>
                             <td>{list.moveOutDate}</td>
-                            <td>{list.id} {index}</td>
+                            <td>{list.userId}</td>
                             <td style={{ color: 'green' }}>
                                 <span><img className='img' src={list.imgUrl} alt="" /></span>
                                 {list.address}
@@ -44,7 +44,7 @@ const Home = () => {
                             <td>{list.uid}</td>
                             <td>({list.balance})</td>
                             <td>
-                                <button className='home-btn' onClick={handleFlip}>Flip room</button>
+                                <button className='home-btn' onClick={() => handleFlip(list.id)}>Flip room</button>
                             </td>
                         </tr>
                     ))}
